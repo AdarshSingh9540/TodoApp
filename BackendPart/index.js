@@ -1,5 +1,5 @@
 const express = require("express");
-const { createTodo } = require("./type"); // Corrected import path
+const { createTodo } = require("./type"); 
 const { todo } = require("./db");
 const cors = require("cors");
 const app = express();
@@ -12,7 +12,7 @@ app.post("/todo", async function(req, res) {
     const parsedPayload = createTodo.safeParse(createPayload);
 
     if (!parsedPayload.success) {
-        res.status(400).json({ // Changed status code to 400
+        res.status(400).json({
             message: "You sent the wrong inputs"
         });
         return;
@@ -21,7 +21,7 @@ app.post("/todo", async function(req, res) {
     await todo.create({
         title: createPayload.title,
         description: createPayload.description,
-        completed: createPayload.completed || false // Default to false if completed is not provided
+        completed: createPayload.completed || false 
     });
 
     res.json({
@@ -33,7 +33,7 @@ app.get("/todos", async function(req, res) {
     const todos = await todo.find({});
 
     res.json({
-        todos: todos // Return fetched todos
+        todos: todos 
     });
 });
 
