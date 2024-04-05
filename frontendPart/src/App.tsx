@@ -1,26 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { CreateTodo } from './components/createTodo'
-import { Todos } from './components/Todos'
+import React, { useEffect, useState } from 'react';
+import './App.css';
+import { CreateTodo } from './components/createTodo';
+import { Todos } from './components/Todos';
+import { ShoWTodos } from './components/ShowTodos';
 
-// useEffect hook
+interface Todo {
+  id: string;
+  title: string;
+  description: string;
+}
+
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
 
-  fetch("http://localhost:3000/todos")
-    .then(async function(res) {
-      const json = await res.json();
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  const fetchTodos = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/todos");
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const json = await response.json();
       setTodos(json.todos);
-    })
+      console.log(json.todos);
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+    }
+  };
 
   return (
     <div>
-      <CreateTodo></CreateTodo>
-      <Todos todos={todos}></Todos>
+      <CreateTodo />
+      <Todos todos={todos} />
+      <div>
+        {todos.length > 0 ? (
+          todos.map(todo => (
+            <ShoWTodos
+              key={todo.id}
+              title={todo.title}
+              description={todo.description}
+            />
+          ))
+        ) : (
+          <p>No todos available</p>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
