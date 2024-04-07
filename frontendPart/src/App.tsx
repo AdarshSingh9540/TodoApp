@@ -36,7 +36,6 @@ function App() {
             key={todo._id}
             title={todo.title}
             description={todo.description}
-          
           />
         ))}
 
