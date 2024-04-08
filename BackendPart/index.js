@@ -37,6 +37,22 @@ app.get("/todos", async function(req, res) {
     });
 });
 
+app.delete("/todo/:id", async function(req, res) {
+    const todoId = req.params.id;
+
+    try {
+        await todo.findByIdAndDelete(todoId);
+        res.json({
+            msg: "Todo deleted"
+        });
+    } catch (error) {
+        res.status(404).json({
+            message: "Todo not found"
+        });
+    }
+});
+
+
 app.listen(3001, () => {
     console.log(`Server is running on port ${3001}`);
 });

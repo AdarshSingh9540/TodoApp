@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Adarsh:singh9540@cluster0.yju1yru.mongodb.net/todoApp')
 
 const todoSchema = mongoose.Schema({
+    _id:mongoose.Schema.Types.ObjectId,
     title:String,
     description:String,
+
     completed:Boolean
 })
 
