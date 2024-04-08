@@ -21,7 +21,7 @@ export function CreateTodo(props) {
         <button 
         className="bg-red-600 text-white p-2 m-2 rounded-md"
         onClick={() => {
-            fetch("http://localhost:3000/todo", {
+            fetch("http://localhost:3001/todo", {
                 method: "POST",
                 body: JSON.stringify({
                     title: title,

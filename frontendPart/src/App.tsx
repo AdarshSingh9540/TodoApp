@@ -15,7 +15,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch("http://localhost:3000/todos");
+      const response = await fetch("http://localhost:3001/todos");
       console.log(response)
       const json = await response.json(); 
       setTodos(json.todos);
