@@ -37,7 +37,7 @@ function App() {
     <div>
       <h1>Todo List</h1>
       <CreateTodo /> 
-      <Todos todos={todos} />
+      {/* <Todos todos={todos} /> */}
       <div>
         {todos.map((todo: Todo) => (
           <div key={todo._id}>
