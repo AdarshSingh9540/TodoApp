@@ -34,7 +34,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='flex flex-col justify-center items-center h-screen'>
       <h1>Todo List</h1>
       <CreateTodo /> 
       {/* <Todos todos={todos} /> */}
