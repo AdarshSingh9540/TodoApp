@@ -60,7 +60,7 @@ const addTodo = async (newTodo: Todo) => {
       }
     });
     console.log('Todo added successfully');
-    await fetchTodos(); // Wait for the new todo to be added before fetching all todos
+    await fetchTodos(); 
   } catch (error) {
     console.error('Error adding todo:', error);
   }
