@@ -16,7 +16,7 @@ function App() {
 
   const fetchTodos = async () => {
     try {
-      const response = await fetch("http://localhost:3001/todos");
+      const response = await fetch("https://todo-backend-jade-iota.vercel.app/todos");
       const json = await response.json(); 
       setTodos(json.todos);
     } catch (error) {
@@ -26,7 +26,7 @@ function App() {
 
   const deleteTodo = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3001/todo/${id}`);
+      await axios.delete(`https://todo-backend-jade-iota.vercel.app/todo/${id}`);
       fetchTodos();
     } catch (error) {
       console.error('Error deleting todo:', error);
@@ -34,21 +34,22 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen'>
-      <h1>Todo List</h1>
-      <CreateTodo /> 
-      {/* <Todos todos={todos} /> */}
-      <div>
-        {todos.map((todo: Todo) => (
-          <div key={todo._id}>
-            <ShoWTodos
-              title={todo.title}
-              description={todo.description}
-            />
-            <button onClick={() => deleteTodo(todo._id)} className='bg-blue-600 text-white'>Delete</button>
-          </div>
-        ))}
-        <button onClick={fetchTodos} className='bg-green-500 p-2'>Show Todo</button>
+    <div className='flex flex-col justify-center items-center h-screen '>
+            <div className='flex flex-col items-center bg-blue-500 p-6 rounded-lg'>
+        <h1 className='text-white font-bold text-xl'>Todo List</h1>
+        <CreateTodo /> 
+        <div>
+          {todos.map((todo: Todo) => (
+            <div key={todo._id}>
+              <ShoWTodos
+                title={todo.title}
+                description={todo.description}
+              />
+              <button onClick={() => deleteTodo(todo._id)} className='bg-blue-600 text-white'>Delete</button>
+            </div>
+          ))}
+          <button onClick={fetchTodos} className='bg-green-500 p-2 hover:bg-green-600 text-white rounded-md font-semibold'>Show Todo</button>
+        </div>
       </div>
     </div>
   );
